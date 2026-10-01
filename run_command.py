@@ -416,11 +416,12 @@ class RunCommandRunLineCommand(sublime_plugin.TextCommand):
                 proc.wait()
                 
             except Exception as e:
-                def show_error():
+                err_msg = str(e)
+                def show_error(err_msg=err_msg):
                     if self.view.is_valid():
                         self.view.run_command('run_command_insert_output', {
                             'point': insert_point,
-                            'text': '[Error: ' + str(e) + ']'
+                            'text': '[Error: ' + err_msg + ']'
                         })
                 sublime.set_timeout(show_error, 0)
         
@@ -537,11 +538,12 @@ class RunCommandRunLineCommand(sublime_plugin.TextCommand):
             proc.wait()
             
         except Exception as e:
-            def show_error():
+            err_msg = str(e)
+            def show_error(err_msg=err_msg):
                 if view.is_valid():
                     view.run_command('run_command_insert_output', {
                         'point': insert_point,
-                        'text': '[Error: ' + str(e) + ']'
+                        'text': '[Error: ' + err_msg + ']'
                     })
             sublime.set_timeout(show_error, 0)
 
@@ -632,10 +634,11 @@ class RunCommandExecuteConfirmedCommand(sublime_plugin.TextCommand):
             
             proc.wait()
         except Exception as e:
-            def show_error():
+            err_msg = str(e)
+            def show_error(err_msg=err_msg):
                 if view.is_valid():
                     view.run_command('run_command_insert_output', {
                         'point': insert_point,
-                        'text': '[Error: ' + str(e) + ']'
+                        'text': '[Error: ' + err_msg + ']'
                     })
             sublime.set_timeout(show_error, 0)
